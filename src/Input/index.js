@@ -1,9 +1,12 @@
 import '../App.css';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 export const Input = ({setCitiesList}) => { 
+    const inputRef = useRef(null);
     const handleOnClick = () => {
         setCitiesList((currentArray) => [...currentArray, inputValue])
+        setInputValue('');
+        inputRef.current.focus();
     }
 
     const [inputValue, setInputValue] = useState('');
@@ -13,7 +16,7 @@ export const Input = ({setCitiesList}) => {
     }
     return (
             <div className="InputWrap">
-                    <input className='Input' onChange={handleOnChange} value={inputValue} />
+                    <input className='Input' onChange={handleOnChange} value={inputValue} ref={inputRef} />
                     <button className='Button' onClick={handleOnClick}>+</button>
             </div>
         )
